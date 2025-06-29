@@ -7,7 +7,7 @@ const User = require('../models/User');
 router.post('/update', async (req, res) => {
   const { name, tasksCompleted, sessionTime } = req.body;
 
-  console.log("🔔 Received update POST:", req.body);
+  console.log("Received update request:", req.body);
 
   let user = await User.findOne({ name });
 
@@ -24,7 +24,11 @@ router.post('/update', async (req, res) => {
   if (user.tasksCompleted < 10 && !user.badges.includes('Trainee')) {
     user.badges.push('Trainee');
   }
+  if (user.tasksCompleted > 100 && !user.badges.includes('Super-Genius')) {
+    user.badges.push(' Super-Genius')
+  }
 
+  console.log(`Updated totals for ${user.name}: Tasks = ${user.tasksCompleted}, Time = ${user.sessionTime}, and Badges = ${user.badges}`);
   await user.save();
   res.json(user);
 });
@@ -33,9 +37,10 @@ router.post('/update', async (req, res) => {
 router.post('/reset', async (req, res) => {
   const { name } = req.body;
 
+  console.log("Received reset request:", req.body);
+
   try {
     const user = await User.findOne({ name });
-
     if (!user) return res.status(404).json({ message: 'User not found' });
 
     user.tasksCompleted = 0;
@@ -43,10 +48,12 @@ router.post('/reset', async (req, res) => {
     user.badges = [];
 
     await user.save();
-    res.json({ message: 'User data reset', user });
+
+    res.json(user);
   } catch (err) {
     res.status(500).json({ error: 'Reset failed', details: err.message });
   }
 });
+
 
 module.exports = router;
