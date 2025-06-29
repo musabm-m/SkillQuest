@@ -4,9 +4,8 @@ SkillQuest is a productivity dashboard that tracks user progress by logging comp
 
 ## 🧱 Project Structure
 
-skillquest/
-├── backend/ ← Node.js + Express + MongoDB API
-├── frontend/ ← React app (optional: Could add CSS/Tailwind, at this point I didn't)
+skillquest/backend/ <- Node.js + Express + MongoDB API
+frontend/ <- React app (optional: Could add CSS/Tailwind, at this point I didn't)
 
 
 ## 🚀 Features
@@ -27,20 +26,5 @@ skillquest/
 **Frontend**:
 - React
 - Axios
-- Tailwind CSS (optional)
-
-## 🔧 Setup Instructions
-
-# Backend Setup
-cd backend
-npm install
-
-```bash
-node server.js
-```
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/yourusername/skillquest.git
-cd skillquest
+- Tailwind CSS (Future)
 
